@@ -1,0 +1,37 @@
+
+version: '3'
+
+services:
+    primary:
+        image: mongo-replset
+        container_name: primary
+        ports:
+            - "3001:27017"
+        environment:
+            ROLE: primary
+            SECONDARY1: secondary1
+            ARBITER: arbiter
+            REPL_SET: docker-tests
+        hostname: primary
+
+    secondary1:
+        build: mongo-replset
+        container_name: secondary1
+        hostname: secondary1
+        environment: 
+            REPL_SET: docker-tests
+        ports: 
+            - "3002:27017"
+        expose:
+            - "27017"
+
+    arbiter:
+        build: mongo-replset
+        hostname: arbiter
+        ports: 
+            - "3003:27017"
+        environment: 
+            REPL_SET: docker-tests
+        container_name: arbiter
+        expose:
+            - "27017"
