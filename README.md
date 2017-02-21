@@ -5,6 +5,16 @@ using three nodes: a primary, a secondary, and an arbiter.
 
 # Running the nodes
 
+## Building the base image
+
+Perform this step first, otherwise the `docker-compose up` step will fail.
+
+```bash
+docker build -t mongo-replset ./mongo-replset
+```
+
+## Running and building the nodes
+
 ```bash
 docker-compose up 
 ```
